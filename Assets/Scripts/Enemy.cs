@@ -52,6 +52,7 @@ public class Enemy : MonoBehaviour {
         transform.position = new Vector2(100, 100);
         IsActive = false;
         suppressionTimer = 0f;
+        UIControl.AddKill();
     }
 
     // Update is called once per frame
@@ -68,7 +69,7 @@ public class Enemy : MonoBehaviour {
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, rotSpeed * Time.deltaTime);
             transform.position += transform.up * speed * Time.deltaTime;
 
-            if ((targetPos - transform.position).magnitude < Grid.UnitSize / 2)
+            if ((targetPos - transform.position).magnitude < Grid.UnitSize / 2) // To close
             {
                 if (ActiveBC.next != null)
                     ActiveBC = ActiveBC.next;

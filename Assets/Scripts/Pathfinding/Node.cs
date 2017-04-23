@@ -165,7 +165,6 @@ public class Node {
 	public void InitializeConnections(Grid grid)
 	{
 		bool valid = true;
-		RaycastHit2D hit;
 		float diagonalDistance = Mathf.Sqrt (Mathf.Pow (Grid.UnitSize/2f, 2) + Mathf.Pow (Grid.UnitSize/2f, 2));
 
 		if (X > 1)

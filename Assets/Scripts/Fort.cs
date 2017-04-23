@@ -7,20 +7,15 @@ public class Fort : MonoBehaviour
 
     public float Cooldown = 2;
     float cooldown;
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
+    public Vector2 target;
+    
     // Update is called once per frame
     void Update()
     {
         cooldown -= Time.deltaTime;
         if (cooldown <= 0)
         {
-            Explosion.Go(new Vector2(2, 2), 2, 2, 3);
+            Granade.Go(transform.position, target, 4, 2, 2, 3);
             cooldown = Cooldown;
         }
     }
@@ -30,6 +25,7 @@ public class Fort : MonoBehaviour
         if( collision.gameObject.GetComponent<Enemy>() != null)
         {
             collision.gameObject.GetComponent<Enemy>().Destroy();
+            UIControl.LifeLost();
         }
     }
 }
