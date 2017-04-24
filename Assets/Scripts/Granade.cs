@@ -24,6 +24,7 @@ public class Granade : MonoBehaviour {
         go.transform.rotation = Quaternion.FromToRotation(Vector2.up, target - Start);
         gr.timeTilInpact = Vector2.Distance(Start, target) / speed;
         go.SetActive(true);
+        SoundBoard.instance.PlayLaunch();
     }
 
     // Use this for initialization

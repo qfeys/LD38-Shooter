@@ -12,16 +12,23 @@ public class Cannon : MonoBehaviour {
     public float ExplSize = 3;
     public float Suppression = 3;
     Vector2 target;
+    bool IsReady = false;
 
     // Use this for initialization
     void Start () {
 		
 	}
+
+    public void Go(Vector2 target)
+    {
+        this.target = target;
+        IsReady = true;
+    }
 	
 	// Update is called once per frame
 	void Update () {
         cooldown -= Time.deltaTime;
-        if (cooldown <= 0)
+        if (cooldown <= 0 && IsReady)
         {
             Granade.Go(transform.position, target + Random.insideUnitCircle * spread, 5, ExplSize, damage, Suppression);
             cooldown = Cooldown;

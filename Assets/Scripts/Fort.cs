@@ -12,11 +12,14 @@ public class Fort : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cooldown -= Time.deltaTime;
-        if (cooldown <= 0)
+        if (GM.Active)
         {
-            Granade.Go(transform.position, target, 4, 2, 2, 3);
-            cooldown = Cooldown;
+            cooldown -= Time.deltaTime;
+            if (cooldown <= 0)
+            {
+                Granade.Go(transform.position, target, 4, 2, 2, 3);
+                cooldown = Cooldown;
+            }
         }
     }
 

@@ -51,7 +51,6 @@ public class Gun : MonoBehaviour {
                 {
                     Shoot(entries[i].transform.position);
                     entries[i].GetComponent<Enemy>().Hit(1);
-                    Debug.Log("Shot fired!");
                     break;
                 }
             }
@@ -81,5 +80,6 @@ public class Gun : MonoBehaviour {
         graphicActive = true;
         line.enabled = true;
         line.SetPosition(1, loc);
+        SoundBoard.instance.PlayGun();
     }
 }

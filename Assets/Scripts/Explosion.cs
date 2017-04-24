@@ -27,6 +27,7 @@ public class Explosion : MonoBehaviour
         shape.radius = 0.1f;
         ex.progression = 0;
         go.SetActive(true);
+        SoundBoard.instance.PlayExplosion();
     }
 
 
