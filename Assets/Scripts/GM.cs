@@ -60,8 +60,10 @@ public class GM : MonoBehaviour {
     internal void EndGame()
     {
         Active = false;
-        FindObjectsOfType<Enemy>().ToList().ForEach(e => e.gameObject.SetActive(false));
+        FindObjectsOfType<Enemy>().ToList().ForEach(e => e.Disable());
         FindObjectsOfType<Boat>().ToList().ForEach(b => b.gameObject.SetActive(false));
+        FindObjectsOfType<Gun>().ToList().ForEach(g => { if (g.transform.parent== null) Destroy( g.gameObject); });
+        FindObjectsOfType<Cannon>().ToList().ForEach(c => { if (c.gameObject.name != "Fort") Destroy(c.gameObject); });
     }
 
     // Update is called once per frame
@@ -71,7 +73,7 @@ public class GM : MonoBehaviour {
             // SPAWNING
             if (timer <= 0)
             {
-                timer = 1.0f / (((int)UIControl.GetTime() / 10) + 1);
+                timer = 1.0f / ((((int)UIControl.GetTime() / 10) + 1)/2f);
                 SpawnBoat();
             }
             timer -= Time.deltaTime;
@@ -114,6 +116,11 @@ public class GM : MonoBehaviour {
             // Other mouse Actions
             if (mouseState == MouseState.WaitForConfirmation)
             {
+                if(ReadiedTurret == null)
+                {
+                    mouseState = MouseState.Blank;
+                    return;
+                }
                 Vector2 mousPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 if (Vector2.Distance(mousPos, ReadiedTurret.transform.position) <= ReadiedTurret.GetComponent<Cannon>().maxRange)
                 {

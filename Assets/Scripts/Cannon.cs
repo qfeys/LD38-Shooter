@@ -24,14 +24,18 @@ public class Cannon : MonoBehaviour {
         this.target = target;
         IsReady = true;
     }
-	
-	// Update is called once per frame
-	void Update () {
-        cooldown -= Time.deltaTime;
-        if (cooldown <= 0 && IsReady)
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (GM.Active)
         {
-            Granade.Go(transform.position, target + Random.insideUnitCircle * spread, 5, ExplSize, damage, Suppression);
-            cooldown = Cooldown;
+            cooldown -= Time.deltaTime;
+            if (cooldown <= 0 && IsReady)
+            {
+                Granade.Go(transform.position, target + Random.insideUnitCircle * spread, 5, ExplSize, damage, Suppression);
+                cooldown = Cooldown;
+            }
         }
     }
 }

@@ -55,6 +55,14 @@ public class Enemy : MonoBehaviour {
         UIControl.AddKill();
     }
 
+    public void Disable()
+    {
+        gameObject.SetActive(false);
+        transform.position = new Vector2(100, 100);
+        IsActive = false;
+        suppressionTimer = 0f;
+    }
+
     // Update is called once per frame
     void Update ()
     {
